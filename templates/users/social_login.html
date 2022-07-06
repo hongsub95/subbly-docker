@@ -1,0 +1,14 @@
+{%extends "base.html" %}
+
+{%block page_title%}
+    Sign up
+{%endblock page_title%}
+
+{% block content %}
+    <a href = "{% url 'users:kakao-login' %}">카카오톡</a>
+    <form method="POST" action = "{% url 'users:signup' %}">
+        {% csrf_token %}
+        {{form.as_p}}
+        <button>회원가입</button>
+    </form>
+{%endblock content%}

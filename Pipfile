@@ -1,0 +1,29 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+mysqlclient = "*"
+django-bootstrap-v5 = "*"
+django-debug-toolbar = "*"
+Django = "*"
+Pillow = "*"
+django-environ = "*"
+requests = "*"
+django-fontawesome-5 = "*"
+django-dotenv = "*"
+djangorestframework = "*"
+django-filter = "*"
+drf-yasg = {extras = ["validation"], version = "*"}
+markdown = "*"
+
+[dev-packages]
+flake8 = "*"
+black = "*"
+
+[requires]
+python_version = "3.8"
+
+[pipenv]
+allow_prereleases = true

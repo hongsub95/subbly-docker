@@ -1,0 +1,4 @@
+Django
+djangorestframework
+mysqlclient
+django-bootstrap-v5

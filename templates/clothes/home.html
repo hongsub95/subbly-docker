@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block page_name %}
+    home
+{% endblock page_name %}
+{% block content %}
+    <div class = "t-container t-mx-auto t-pb-10">
+        <div class="t-flex t-flex-wrap t-mb-10">
+            {% for clothes in clothes_set %}
+                {% include "mixins/clothes_card.html" with clothes=clothes %}
+            {% endfor %}
+        </div>
+    </div>
+{% endblock content %}

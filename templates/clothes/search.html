@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block page_title %}
+    검색
+{% endblock page_title %}
+
+{% block search-bar %}{% endblock search-bar %}
+
+{% block content %}
+    <form method="post" action="{% url 'clothes:search' %}">
+        {% csrf_token %}
+        {{form.as_p}}
+        <input type="submit">
+    </form>
+    
+    {% if clothes_list %}
+        {% for clothe in clothes_list %}
+            {{clothe.name}}
+        {% endfor %}
+    {% elif name %}
+        <span>검색 결과 찾으시는 옷이 없습니다.</span>
+    {% endif %}
+{% endblock content %}
+
+

@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+    <div class ="t-container t-mx-auto t-pb-10">
+        <div class ="t-flex t-flex-wrap -t-mx-36 t-mb-10">
+            {% for c in clothes %}
+                    {% include "mixins/clothes_card.html" with clothes=c %}
+            {% endfor %}
+        </div>
+            
+        {% if clothes.has_previous %}
+            <a href="?page={{clothes.previous_page_number}}">이전</a>
+            
+        {% endif %}
+            
+        Page {{clothes.number}} / {{clothes.paginator.num_pages}}
+            
+        {% if clothes.has_next %}
+            <a href = "?page={{clothes.next_page_number}}">다음</a>
+        {% endif %}
+    </div>
+            
+
+{% endblock content %}

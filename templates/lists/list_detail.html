@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    {% if not list_items %}
+        <div>
+            <div class="t-text-center" >
+                <br>
+                <h1>
+                    장바구니가 비어있습니다.
+                </h1>
+                <br>
+                <p class="t-text-center">
+                    옷을 구경하고 싶다면?
+                    <a herf = "{% url 'clothes:clothes_list' %}">여기를 클릭하세요</a>
+                </p>
+            </div>
+        </div>
+    {% else %}
+        <div>
+            <div class="t-text-center">
+                <br>
+                <h1 class="t-text-center">
+                    장바구니 목록
+                </h1>
+                <br>
+            </div>
+        </div>
+        {% for item in list_items %}
+            <a href="{{item.clothes.get_absolute_url}}">
+                {{item.clothes.name}}
+            </a>
+        {% endfor %}
+        <p class="t-text-center">
+            옷을 구경하고 싶다면?
+            <a class ="t-text-lg t-font-black" href = "{% url 'clothes:clothes_list' %}">여기를 클릭하세요</a>
+        </p>
+    {% endif %}
+
+{% endblock content %}

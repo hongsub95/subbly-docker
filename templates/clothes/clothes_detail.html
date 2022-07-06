@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    <h1>{{clothes.name}}</h1>
+    <a href = {% url 'lists:add_list' clothes.pk %}>
+        장바구니에 담기
+    </a>
+    <a href ="{% url 'lists:remove_list' clothes.pk %}">
+        장바구니에서 삭제
+    </a>
+{% endblock content %}
+
