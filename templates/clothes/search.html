@@ -1,25 +1,34 @@
-{% extends "base.html" %}
-
-{% block page_title %}
-    검색
-{% endblock page_title %}
-
-{% block search-bar %}{% endblock search-bar %}
+{% extends 'base.html' %}
 
 {% block content %}
-    <form method="post" action="{% url 'clothes:search' %}">
-        {% csrf_token %}
-        {{form.as_p}}
-        <input type="submit">
-    </form>
+
+    {% if clothes %}
+        <div class = "t-container t-w-full">
+            <div class="t-flex ">
+                {% for c in clothes %}
+                    {% include "mixins/clothes_card.html" with clothes=c %}
+                {% endfor %}
+            </div>
+            {% if clothes.has_previous %}
+                <a href="?page={{clothes.previous_page_number}}">이전</a>
+            {% endif %}
+
+            Page {{clothes.number}} of {{clothes.paginator.num_page}}
+
+            {% if clothes.has_next %}
+                <a href="?page={{clothes.next_page_number}}">다음</a>
+            {% endif %}
+            
+            {% for page in clothes.paginator.page_range %}
+                {{page}}
+            {% endfor %}
     
-    {% if clothes_list %}
-        {% for clothe in clothes_list %}
-            {{clothe.name}}
-        {% endfor %}
-    {% elif name %}
-        <span>검색 결과 찾으시는 옷이 없습니다.</span>
+        </div>
+    {% elif query %}
+    <div class = "t-text-center ">
+       <h3>죄송합니다. 현재 찾으시는 {{query}} 상품이 없습니다.</h3>
+    </div>
     {% endif %}
+    
+
 {% endblock content %}
-
-

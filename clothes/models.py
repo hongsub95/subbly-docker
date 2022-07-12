@@ -1,3 +1,4 @@
+from multiprocessing.sharedctypes import Value
 from tabnanny import verbose
 from django.db import models
 from django.shortcuts import reverse
@@ -59,6 +60,13 @@ class Clothes(core_models.TimeStampedModel):
         verbose_name="판매자",
     )
 
+    def thumbnail(self):
+        try:
+            photo = self.photo.all()[0]
+            return photo.file.url
+        except ValueError:
+            return None
+
     class Meta:
         verbose_name_plural = "상품"
 
@@ -67,3 +75,5 @@ class Clothes(core_models.TimeStampedModel):
 
     def get_absolute_url(self):
         return reverse("clothes:clothes_detail", kwargs={"pk": self.pk})
+
+  

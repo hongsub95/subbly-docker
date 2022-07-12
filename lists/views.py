@@ -27,7 +27,8 @@ def add_list(request, clothes_pk):
             clothes=clothes, quantity=1, list=list
         )
         list_item.save()
-    return redirect("lists:list_detail")
+    
+    return redirect("clothes:clothes_detail",clothes_pk)
 
 
 def list_detail(request):
@@ -40,6 +41,7 @@ def list_detail(request):
         for item in list_items:
             total += item.clothes.price * item.quantity
             cnt += item.quantity
+        
     except ObjectDoesNotExist:
         pass
     return render(
@@ -51,7 +53,7 @@ def list_detail(request):
 
 def list_delete(request, clothes_pk):
     list = models.List.objects.get(list_id=_list_id(request))
-    clothes = get_object_or_404(clothes_models.Clothes, pk=clothes_pk)
+    clothes = clothes_models.Clothes.objects.get(pk=clothes_pk)
     list_item = models.ListItem.objects.get(clothes=clothes, list=list)
     if list_item.quantity > 1:
         list_item.quantity -= 1

@@ -1,17 +1,23 @@
-from django.forms import ModelForm
+from django import forms
 from . import models as clothes_models
 from options import models as options_models
 from markets import models as markgets_models
 
 
-class SearchForm(ModelForm):
+class SearchForm(forms.ModelForm):
     class Meta:
         model = clothes_models.Clothes
         fields = ("name",)
 
 
+class SearchForm(forms.Form):
+    clothes = forms.CharField(
+        label='검색키워드',
+        required=False,
+    )
 
-class ContactForm(ModelForm):
+
+class ContactForm(forms.ModelForm):
 
     class Meta:
         model = clothes_models.Clothes
