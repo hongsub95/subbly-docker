@@ -4,8 +4,8 @@
     home
 {% endblock page_name %}
 {% block content %}
-    <div class = "t-container t-mx-auto t-pb-10">
-        <div class="t-flex t-flex-wrap t-mb-10">
+    <div class = "t-container t-mx-auto t-pb-10 ">
+        <div class="t-grid t-grid-flow-col t-mb-10 -t-x-36">
             {% for clothes in clothes_set %}
                 {% include "mixins/clothes_card.html" with clothes=clothes %}
             {% endfor %}

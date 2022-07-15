@@ -25,9 +25,11 @@ def all_clothes(request):
             },
         )
     else:
-        for _ in range(10):
-            num = random.randint(0, len_clothes - 1)
-            clothes_set.add(clothes[num])
+        num_list = [i for i in range(1,len_clothes+1)]
+        num_random = random.sample(num_list,14)
+        for i in num_random:
+            product = clothes_models.objects.get(id=i)
+            clothes_set.add(product)
     return render(
         request,
         "clothes/home.html",
