@@ -142,3 +142,4 @@ uploads/
 node_modules/
 .idea
 config/settings/static/tailwind.output.css
+static/tailwind.output.css
