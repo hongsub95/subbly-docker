@@ -134,7 +134,7 @@ def clothes_list_outer(request):
 
 class clothes_detail(DetailView):
     model = clothes_models
-
+    
 
 class SearchView(View):
 

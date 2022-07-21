@@ -1,5 +1,5 @@
 {   
-    "python.pythonPath" : "C:/Users/hong9/AppData/Local/Programs/Python/Python310/Lib/site-packages",
+    "python.pythonPath" : "/home/hongsub/.local/share/virtualenvs/subbly-server-tZcz3KYQ/bin/python",
     "python.linting.flake8Enabled": false,
     "python.linting.pylintEnabled": false,
     "python.linting.enabled": true,

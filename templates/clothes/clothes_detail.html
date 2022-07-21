@@ -1,11 +1,30 @@
 {% extends 'base.html' %}
 
 {% block content %}
-
-    <h1>{{clothes.name}}</h1>
+<div class="t-container t-mx-auto t-flex t-justify-center">
+    <div class="">
+    <img src="{{clothes.thumbnail}}" style="width: 30rem" class=" t-mr-10">
+    </div>
+    <div class ="t-flex-col t-justify-between ">
+        <h3>{{clothes.name}}</h3>
+        <h5>{{clothes.description}}</h5>
+        <h7>가격 : {{clothes.price}} </h7>
+        <select class="form-select form-select-sm" style="width: 7rem" aria-label=".form-select-sm example">
+            <option selected>사이즈</option>
+            {% for size in object.size.all %}
+                <option value="{{size}}">{{size}}</option>
+            {% endfor %}
+        </select>
+        <select class="form-select form-select-sm" style="width: 7rem" aria-label=".form-select-sm example">
+            <option selected>색상</option>
+            {% for color in object.colors.all %}
+                <option value="{{color}}">{{color}}</option>
+            {% endfor %}
+        </select>
     <a href = '{% url 'lists:add_list' clothes.pk %}'>
         장바구니에 담기
     </a>
-
+    </div>
+</div>
 {% endblock content %}
 

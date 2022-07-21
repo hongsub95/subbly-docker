@@ -17,6 +17,8 @@ djangorestframework = "*"
 django-filter = "*"
 drf-yasg = {extras = ["validation"], version = "*"}
 markdown = "*"
+boto3 = "*"
+django-storages = "*"
 
 [dev-packages]
 flake8 = "*"

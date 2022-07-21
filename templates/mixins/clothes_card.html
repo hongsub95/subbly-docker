@@ -1,12 +1,10 @@
-<div class="card" style="width: 20rem;">
+<div class="card" style="width: 13rem;">
     <a href="{% url 'clothes:clothes_detail' clothes.pk %}">
-        <div class="t-w-16 t-h-16">
-            <img src="{{clothes.thumbnail}}" class="card-img-top t-object-fill" >
-            <div class="card-body t-py-3">
-                <p class="card-text t-text-black t-text-center">
-                    {{clothes.name}}
-                </p>
-            </div>
+        <img src="{{clothes.thumbnail}}" class="card-img-top t-object-fill" >
+        <div class="card-body">
+            <p class="card-text  t-text-center">
+                <span class="t-text-black  ">{{clothes.name}}</span>
+            </p>
         </div>
     </a>
 </div>

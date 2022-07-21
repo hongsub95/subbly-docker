@@ -2,7 +2,7 @@
 {% load static %}
 {% block content %}
     <div class = "t-container t-mx-auto t-pb-10">
-        <div class="t-flex t-flex-wrap t-justify-start t-mb-10 -t-x-36">
+        <div class="t-flex t-flex-wrap t-justify-around t-mb-10 -t-x-36">
             {% for c in clothes %}
                 {% include "mixins/clothes_card.html" with clothes=c %}
             {% endfor %}
