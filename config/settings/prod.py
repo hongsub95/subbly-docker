@@ -5,7 +5,7 @@ DEBUG = False
 ALLOWED_HOSTS = [
     "127.0.0.1",
     "localhost",
-    "54.180.94.49"
+    "3.35.4.104"
 ]
 
 DJANGO_APPS = [
