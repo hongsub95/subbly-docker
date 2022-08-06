@@ -19,6 +19,7 @@ drf-yasg = {extras = ["validation"], version = "*"}
 markdown = "*"
 boto3 = "*"
 django-storages = "*"
+django-rest-swagger = "*"
 
 [dev-packages]
 flake8 = "*"

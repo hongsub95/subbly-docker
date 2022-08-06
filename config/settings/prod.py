@@ -29,11 +29,14 @@ PROJECT_APPS = [
 THIRD_APPS = [
     "bootstrap5",
     "rest_framework",
-    "storages"
+    "storages",
+    "rest_framework_swagger"
 ]
 
 INSTALLED_APPS = DJANGO_APPS + PROJECT_APPS + THIRD_APPS
 
+
+# AWS S3 쓸때 재활용 ㄱㄱ
 AWS_S3_SECURE_URLS = False       # use http instead of https
 AWS_QUERYSTRING_AUTH = False     # don't add complex authentication-related query parameters for requests
 DEFAULT_FILE_STORAGE = "config.settings.custom_storages.upload_storage"

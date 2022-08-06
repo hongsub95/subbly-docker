@@ -10,6 +10,7 @@ urlpatterns = [
     path("lists/", include("lists.urls", namespace="lists")),
     path("admin", admin.site.urls),
     path("api/v1/clothes/", include("clothes.api.urls", namespace="clothes_api")),
+    path("api/v1/users/", include("users.api.urls", namespace="users_api")),
 ]
 
 

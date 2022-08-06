@@ -59,10 +59,11 @@ WSGI_APPLICATION = "config.wsgi.application"
 
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
+
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.mysql",
-        "NAME":os.environ.get("DB_NAME"),
+        "NAME":"subbly-db",
         "USER": "admin",
         "PASSWORD":os.environ.get("DB_PWD"),
         "HOST": "subbly-db.cq026ec0kbij.ap-northeast-2.rds.amazonaws.com",
@@ -72,6 +73,7 @@ DATABASES = {
         },
     }
 }
+
 
 
 # Password validation
@@ -135,3 +137,20 @@ REST_FRAMEWORK = {
 }
 
 
+
+"""
+# AWS RDS(maria db 쓸때 재활용 ㄱㄱ)
+DATABASES = {
+    "default": {
+        "ENGINE": "django.db.backends.mysql",
+        "NAME":os.environ.get("DB_NAME"),
+        "USER": "admin",
+        "PASSWORD":os.environ.get("DB_PWD"),
+        "HOST": "subbly-db.cq026ec0kbij.ap-northeast-2.rds.amazonaws.com",
+        "PORT": "3306",
+        'OPTIONS':{
+            'init_command' : "SET sql_mode='STRICT_TRANS_TABLES'"
+        },
+    }
+}
+"""
