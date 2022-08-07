@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 """
 
 from pathlib import Path
+import datetime
 import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -132,8 +133,25 @@ STATICFILES_DIRS = [
 ]
 
 REST_FRAMEWORK = {
-    "DEFAULT_PAGINATION_CLASS": "rest_framework.pagination.PageNumberPagination",
+    "DEFAULT_PAGINATION_CLASS": 
+        ["rest_framework.pagination.PageNumberPagination",],
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.IsAuthenticated',
+        'rest_framework.permissions.AllowAny',
+    ],
+    'DEFAULT_AUTHENTICATION_CLASSES':
+        ['rest_framework_simplejwt.authentication.JWTAuthentication',],
+        
     "PAGE_SIZE": 10,
+}
+
+SIMPLE_JWT = {
+    'ACCESS_TOKEN_LIFETIME': datetime.timedelta(minutes=120), #access token은 2시간
+    'REFRESH_TOKEN_LIFETIME': datetime.timedelta(days=14), #refresh token은 2주
+    'BLACKLIST_AFTER_ROTAION':True, #기존 refresh토큰은 blacklist가 됨
+    'SIGNING_KEY': 'SECRET',
+    'ALGORITHM': 'HS256',
+    'AUTH_HEADER_TYPES': ('JWT',),
 }
 
 

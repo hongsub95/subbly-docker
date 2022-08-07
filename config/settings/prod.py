@@ -30,7 +30,8 @@ THIRD_APPS = [
     "bootstrap5",
     "rest_framework",
     "storages",
-    "rest_framework_swagger"
+    "rest_framework_swagger",
+    'rest_framework_simplejwt',
 ]
 
 INSTALLED_APPS = DJANGO_APPS + PROJECT_APPS + THIRD_APPS
