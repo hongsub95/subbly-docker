@@ -48,4 +48,5 @@ urllib3==1.26.10
 zipp==3.8.1
 django-rest-swagger
 uwsgi
+djangorestframework-simplejwt
 

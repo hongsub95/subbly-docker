@@ -11,3 +11,4 @@ urlpatterns = [
     path("login/kakao/callback", views.kakao_callback, name="kakao-callback"),
     
 ]
+
