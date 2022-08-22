@@ -20,5 +20,9 @@ class UserTokenObtainSerializer(TokenObtainPairSerializer): #token 페어로드
         token['is_active'] = user.is_active
         
         return token
+
+class ApiRefreshRefreshTokenSerializer(serializers.Serializer):
+    refresh = serializers.CharField()
+    pass
     
 
