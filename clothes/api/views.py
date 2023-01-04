@@ -1,19 +1,25 @@
 from rest_framework import viewsets
+from rest_framework import generics
 from rest_framework import permissions
 from . import serializers
-from .permissions import IsOwner
+from .permissions import IsOwnerOrAdmin
 from clothes import models
 
 
-class ClothesViewset(viewsets.ModelViewSet):
-    queryset = models.Clothes.objects.all()
-    serializer_class = serializers.ClothesSerializer
+class ClothesReadOrCreateView(generics.ListCreateAPIView):
+    queryset = models.Clothes
+    permission_classes = []
+    
+    def get_serializer_class(self):
+        if self.request.method == 'GET':
+            return serializers.ClothesSerializer
+        return serializers.ClothesCreateSerializer
 
-    def get_permissions(self):
-        if self.action == "list" or self.action == "retrieve":
-            permission_classes = [permissions.AllowAny]
-        elif self.action == "create":
-            permission_classes = [permissions.IsAuthenticated]
-        else:
-            permission_classes = [IsOwner]
-        return [permission() for permission in permission_classes]
+class ClothesRetrieveOrDestroyView(generics.RetrieveUpdateDestroyAPIView):
+    permission_classes = [IsOwnerOrAdmin]
+    
+    def get_serializer_class(self):
+        if self.request.method == 'GET':
+            return serializers.ClothesSerializer
+        return serializers.ClothesPatchSerializer
+

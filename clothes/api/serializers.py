@@ -12,7 +12,18 @@ class CategorySerializer(serializers.ModelSerializer):
         fields = ("name",)
 
 
+
 class ClothesSerializer(serializers.ModelSerializer):
+    colors = options_serializers.ColorSerialzer(many=True)
+    category = CategorySerializer()
+    market = markets_serializers.MarketSerialzer()
+    size = options_serializers.SizeSerialzer(many=True)
+    
+    class Meta:
+        model = clothes_models.Clothes
+        exclude = ()
+
+class ClothesCreateSerializer(serializers.ModelSerializer):
     colors = options_serializers.ColorSerialzer(many=True)
     category = CategorySerializer()
     market = markets_serializers.MarketSerialzer()
@@ -42,3 +53,10 @@ class ClothesSerializer(serializers.ModelSerializer):
             options_models.Color.objects.create(clothes=clothes, **color_data)
 
         return clothes
+
+class ClothesPatchSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = clothes_models.Clothes
+        exclude = ()
+        
+    

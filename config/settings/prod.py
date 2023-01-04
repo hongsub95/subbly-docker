@@ -36,7 +36,7 @@ THIRD_APPS = [
 
 INSTALLED_APPS = DJANGO_APPS + PROJECT_APPS + THIRD_APPS
 
-
+'''
 # AWS S3 쓸때 재활용 ㄱㄱ
 AWS_S3_SECURE_URLS = False       # use http instead of https
 AWS_QUERYSTRING_AUTH = False     # don't add complex authentication-related query parameters for requests
@@ -48,3 +48,4 @@ AWS_STORAGE_BUCKET_NAME = 's3-subbly'
 AWS_DEFAULT_ACL= "public-read"
 AWS_S3_CUSTOM_DOMAIN = f"{AWS_STORAGE_BUCKET_NAME}.s3.ap-northeast-2.amazonaws.com"
 STATIC_URL = f"https://{AWS_S3_CUSTOM_DOMAIN}/static/"
+'''

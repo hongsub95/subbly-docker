@@ -1,6 +1,7 @@
 from rest_framework.permissions import BasePermission
 
 
-class IsOwner(BasePermission):
+class IsOwnerOrAdmin(BasePermission):
     def has_object_permission(self, request, view, clothes):
-        return clothes.host == request.user
+        if clothes.host == request.user :
+            return bool(True)

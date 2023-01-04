@@ -3,6 +3,7 @@ from re import template
 from django.shortcuts import render, redirect
 from django.core.paginator import Paginator, EmptyPage
 from django.views.generic import DetailView, FormView, ListView,View
+from django.contrib.auth.decorators import login_required
 import random
 from django.db.models import Q 
 from .models import Clothes as clothes_models

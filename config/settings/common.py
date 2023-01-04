@@ -64,10 +64,10 @@ WSGI_APPLICATION = "config.wsgi.application"
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.mysql",
-        "NAME":"subbly-db",
-        "USER": "admin",
+        "NAME":"subbly",
+        "USER": "root",
         "PASSWORD":os.environ.get("DB_PWD"),
-        "HOST": "subbly-db.cq026ec0kbij.ap-northeast-2.rds.amazonaws.com",
+        "HOST": "localhost",
         "PORT": "3306",
         'OPTIONS':{
             'init_command' : "SET sql_mode='STRICT_TRANS_TABLES'"
