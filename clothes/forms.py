@@ -1,7 +1,6 @@
 from django import forms
 from . import models as clothes_models
-from options import models as options_models
-from markets import models as markgets_models
+from markets import models as markets_models
 
 
 class SearchForm(forms.ModelForm):

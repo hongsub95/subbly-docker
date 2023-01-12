@@ -2,7 +2,7 @@ from django.contrib import admin
 from . import models
 from django.utils.safestring import mark_safe
 
-
+'''
 class clothes_photo(admin.TabularInline):
     model = models.photo
 
@@ -40,30 +40,19 @@ class ClothesAdmin(admin.ModelAdmin):
                     "price",
                     "size",
                     "market",
-                    "host",
                 ),
             },
         ),
     )
-    filter_horizontal = ("size", "colors")
     list_display = (
         "name",
-        "color",
+        "colors",
         "price",
         "category",
-        "host",
     )
     search_fields = ("name", "colors")
-    raw_id_fields = ("host", "market")
+    raw_id_fields = ( "market",)
     inlines = [
         clothes_photo,
     ]
-
-    def color(self, obj):
-        c = obj.colors.all()
-        color_list = []
-        for co in c:
-            color_list.append(co)
-        return color_list if len(color_list) < 5 else color_list[:5]
-
-    color.short_description = "색상"
+'''

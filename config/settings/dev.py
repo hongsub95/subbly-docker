@@ -2,7 +2,7 @@
 from .common import *
 
 
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = [
     
@@ -25,13 +25,15 @@ PROJECT_APPS = [
     "core.apps.CoreConfig",
     "clothes.apps.ClothesConfig",
     "markets.apps.MarketsConfig",
-    "options.apps.OptionsConfig",
     "lists.apps.ListsConfig",
+    "seed.apps.SeedConfig",
 ]
 
 THIRD_APPS = [
     "bootstrap5",
     "rest_framework",
+    "rest_framework_swagger",
+    "rest_framework_simplejwt",
 ]
 
 INSTALLED_APPS = DJANGO_APPS + PROJECT_APPS + THIRD_APPS

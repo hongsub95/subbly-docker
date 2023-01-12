@@ -25,18 +25,11 @@ class Categories(core_models.TimeStampedModel):
     def __str__(self):
         return self.name
 
-
+#전시용
 class Clothes(core_models.TimeStampedModel):
     name = models.CharField(max_length=100, verbose_name="상품명")
     description = models.TextField(verbose_name="설명")
     price = models.IntegerField(verbose_name="가격")
-    stock = models.IntegerField(verbose_name="재고")
-    colors = models.ManyToManyField(
-        "options.Color", related_name="clothes", blank=True, verbose_name="색상"
-    )
-    size = models.ManyToManyField(
-        "options.Size", related_name="clothes", blank=True, verbose_name="사이즈"
-    )
     category = models.ForeignKey(
         "Categories",
         related_name="clothes",
@@ -53,20 +46,15 @@ class Clothes(core_models.TimeStampedModel):
         null=True,
         blank=True,
     )
-    host = models.ForeignKey(
-        "users.User",
-        related_name="clothes",
-        on_delete=models.CASCADE,
-        verbose_name="판매자",
-    )
 
     def thumbnail(self):
+        
         try:
             photo = self.photo.all()[0]
             return photo.file.url
-        except ValueError:
+        except IndexError:
             return None
-
+        
     class Meta:
         verbose_name_plural = "상품"
 
@@ -76,4 +64,33 @@ class Clothes(core_models.TimeStampedModel):
     def get_absolute_url(self):
         return reverse("clothes:clothes_detail", kwargs={"pk": self.pk})
 
-  
+#내부용
+class Product(models.Model):
+    clothes = models.ForeignKey("clothes",on_delete=models.DO_NOTHING)
+    name = models.CharField(max_length=100, verbose_name="상품명")
+    price = models.IntegerField(verbose_name="가격")
+    description = models.TextField(verbose_name="설명")
+    stock = models.IntegerField(verbose_name="재고")
+    colors = models.CharField(
+        max_length=20,verbose_name="색상"
+    )
+    size = models.CharField(
+        max_length=20,verbose_name="사이즈"
+    )
+    category = models.ForeignKey(
+        "Categories",
+        related_name="product",
+        on_delete=models.DO_NOTHING,
+        verbose_name="카테고리",
+        null=True,
+        blank=True,
+    )
+    market = models.ForeignKey(
+        "markets.Market",
+        related_name="product",
+        on_delete=models.CASCADE,
+        verbose_name="사이트",
+        null=True,
+        blank=True,
+    )
+    is_sold_out = models.BooleanField(verbose_name="품절여부",default=False)

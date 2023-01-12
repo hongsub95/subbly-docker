@@ -23,10 +23,10 @@ class LoginForm(forms.Form):
 class SignUpForm(forms.ModelForm):
     class Meta:
         model = models.User
-        fields = ("first_name", "email")
+        fields = ("name", "email")
 
         widgets = {
-            "first_name": forms.TextInput(attrs={"placeholder": "이름"}),
+            "name": forms.TextInput(attrs={"placeholder": "이름"}),
             
             "email": forms.EmailInput(attrs={"placeholder": "아이디"}),
         }

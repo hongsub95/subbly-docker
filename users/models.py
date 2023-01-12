@@ -3,27 +3,21 @@ from django.contrib.auth.models import AbstractUser
 
 
 class User(AbstractUser):
-    GENDER_MALE = "Male"
-    GENDER_FEMALE = "Female"
-    GENDER_OTHER = "Other"
-    GENDER_CHOICES = [
-        (GENDER_MALE, "Male"),
-        (GENDER_FEMALE, "Female"),
-        (GENDER_OTHER, "Other"),
-    ]
-    LOGIN_EMAIL = "email"
-    LOGIN_KAKAO = "kakao"
-
-    LOGIN_CHOICES = (
-        (LOGIN_EMAIL, "Email"),
-        (LOGIN_KAKAO, "Kakao"),
-    )
+    class GenderChoices(models.TextChoices):
+        MALE = "M", "남성"
+        FEMALE = "F", "여성" 
+    class LoginChoices(models.TextChoices):
+        KAKAO = "KAKAO","카카오"
+        EMAIL = "EMAIL","이메일"
+    first_name = None
+    last_name = None
+    name = models.CharField(max_length=20,verbose_name="이름")
     login_method = models.CharField(
-        max_length=50, choices=LOGIN_CHOICES, default=LOGIN_EMAIL
+        max_length=50, choices=LoginChoices.choices, default=LoginChoices.EMAIL
     )
     avatar = models.ImageField(blank=True, upload_to="avatar", verbose_name="프로필 사진")
     gender = models.CharField(
-        max_length=10, null=True, blank=True, choices=GENDER_CHOICES, verbose_name="성별"
+        max_length=10, null=True, blank=True, choices=GenderChoices.choices, verbose_name="성별"
     )
     height = models.IntegerField(blank=True, null=True, verbose_name="키")
     weight = models.IntegerField(blank=True, null=True, verbose_name="몸무게")
