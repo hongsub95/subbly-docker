@@ -10,7 +10,7 @@ class Market(core_models.TimeStampedModel):
     description = models.TextField(verbose_name="설명")
     master = models.OneToOneField(User_models.User,on_delete=models.CASCADE)
     def __str__(self):
-        self.name
+        return self.name
 
     class Meta:
         verbose_name_plural = "마켓"

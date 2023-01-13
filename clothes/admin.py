@@ -2,7 +2,7 @@ from django.contrib import admin
 from . import models
 from django.utils.safestring import mark_safe
 
-'''
+
 class clothes_photo(admin.TabularInline):
     model = models.photo
 
@@ -11,7 +11,7 @@ class clothes_photo(admin.TabularInline):
 class PhotoAdmin(admin.ModelAdmin):
     list_display = (
         "product",
-        "get_thumbnail",
+        
     )
 
     def get_thumbnail(self, obj):
@@ -35,10 +35,7 @@ class ClothesAdmin(admin.ModelAdmin):
                     "name",
                     "description",
                     "category",
-                    "stock",
-                    "colors",
                     "price",
-                    "size",
                     "market",
                 ),
             },
@@ -46,13 +43,12 @@ class ClothesAdmin(admin.ModelAdmin):
     )
     list_display = (
         "name",
-        "colors",
         "price",
         "category",
     )
-    search_fields = ("name", "colors")
+    search_fields = ("name", )
     raw_id_fields = ( "market",)
     inlines = [
         clothes_photo,
     ]
-'''
+

@@ -9,16 +9,10 @@
         <h3>{{clothes.name}}</h3>
         <h5>{{clothes.description}}</h5>
         <h7>가격 : {{clothes.price}} </h7>
-        <select class="form-select form-select-sm" style="width: 7rem" aria-label=".form-select-sm example">
-            <option selected>사이즈</option>
-            {% for size in object.size.all %}
-                <option value="{{size}}">{{size}}</option>
-            {% endfor %}
-        </select>
-        <select class="form-select form-select-sm" style="width: 7rem" aria-label=".form-select-sm example">
-            <option selected>색상</option>
-            {% for color in object.colors.all %}
-                <option value="{{color}}">{{color}}</option>
+        <select class="form-select form-select-sm" style="width: 8rem" aria-label=".form-select-sm example">
+            <option selected>사이즈-색상</option>
+            {% for option in product %}
+                <option value="{{option.size}}">{{option.size}}-{{option.colors}}</option>
             {% endfor %}
         </select>
     <a href = '{% url 'lists:add_list' clothes.pk %}'>

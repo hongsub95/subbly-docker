@@ -126,7 +126,7 @@ INTERNAL_IPS = [
 ]
 
 MEDIA_ROOT = BASE_DIR / "uploads"
-MEDIA_URL = "/media/"
+    
 
 STATICFILES_DIRS = [
     BASE_DIR / "config/settings/static",

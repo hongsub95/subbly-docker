@@ -6,7 +6,7 @@ from django.views.generic import DetailView, FormView, ListView,View
 from django.contrib.auth.decorators import login_required
 import random
 from django.db.models import Q 
-from clothes.models import Clothes,Product
+from clothes.models import Clothes,Product,Categories
 from .models import photo as Photo_models
 from .forms import SearchForm , ContactForm
 
@@ -56,7 +56,9 @@ def clothes_list(request):
 
 def clothes_list_onepiece(request):
     page = request.GET.get("page", 1)
-    clothes_list = Clothes.objects.filter()
+    category_id = Categories.objects.filter(name="원피스").first().id
+    clothes_list = Clothes.objects.filter(category_id = category_id).all()
+    
     paginator = Paginator(clothes_list, 10)
     
     try:
@@ -72,7 +74,9 @@ def clothes_list_onepiece(request):
 
 def clothes_list_upper(request):
     page = request.GET.get("page", 1)
-    clothes_list = Clothes.objects.filter(category_id=2)
+    category_id = Categories.objects.filter(name="상의").first().id
+    clothes_list = Clothes.objects.filter(category_id = category_id).all()
+    
     paginator = Paginator(clothes_list, 10)
   
     try:
@@ -87,7 +91,8 @@ def clothes_list_upper(request):
 
 def clothes_list_pants(request):
     page = request.GET.get("page", 1)
-    clothes_list = Clothes.objects.filter(category_id=3)
+    category_id = Categories.objects.filter(name="하의").first().id
+    clothes_list = Clothes.objects.filter(category_id = category_id).all()
     paginator = Paginator(clothes_list, 10)
     
     try:
@@ -102,7 +107,8 @@ def clothes_list_pants(request):
 
 def clothes_list_shoes(request):
     page = request.GET.get("page", 1)
-    clothes_list = Clothes.objects.filter(category_id=4)
+    category_id = Categories.objects.filter(name="신발").first().id
+    clothes_list = Clothes.objects.filter(category_id = category_id).all()
     paginator = Paginator(clothes_list, 10)
     
     try:
@@ -117,7 +123,9 @@ def clothes_list_shoes(request):
 
 def clothes_list_outer(request):
     page = request.GET.get("page", 1)
-    clothes_list = Clothes.objects.filter(category_id=5)
+
+    category_id = Categories.objects.filter(name="신발").first().id
+    clothes_list = Clothes.objects.filter(category_id = category_id).all()
     paginator = Paginator(clothes_list, 10)
     
     try:
@@ -133,8 +141,10 @@ def clothes_list_outer(request):
 
 
 
-class clothes_detail(DetailView):
-    model = Clothes
+def clothes_detail(request,clothes_id):
+    clothes = Clothes.objects.get(pk=clothes_id)
+    product = Product.objects.filter(clothes_id=clothes_id).all()
+    return render(request,"clothes/clothes_detail.html",{"clothes":clothes,"product":product})
     
 
 class SearchView(View):

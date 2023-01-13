@@ -48,9 +48,9 @@ class Clothes(core_models.TimeStampedModel):
     )
 
     def thumbnail(self):
-        
+        img_name = self.name
         try:
-            photo = self.photo.all()[0]
+            photo = self.photo.get(name=f"{img_name}.jpg")
             return photo.file.url
         except IndexError:
             return None
@@ -68,7 +68,7 @@ class Clothes(core_models.TimeStampedModel):
 class Product(models.Model):
     clothes = models.ForeignKey("clothes",on_delete=models.DO_NOTHING)
     name = models.CharField(max_length=100, verbose_name="상품명")
-    price = models.IntegerField(verbose_name="가격")
+    
     description = models.TextField(verbose_name="설명")
     stock = models.IntegerField(verbose_name="재고")
     colors = models.CharField(
