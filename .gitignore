@@ -143,3 +143,4 @@ node_modules/
 .idea
 config/settings/static/tailwind.output.css
 static/tailwind.output.css
+docker_projects/elk__1/elasticsearch/data
