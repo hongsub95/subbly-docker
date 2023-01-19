@@ -65,7 +65,7 @@ class Clothes(core_models.TimeStampedModel):
         return reverse("clothes:clothes_detail", kwargs={"pk": self.pk})
 
 #내부용
-class Product(core_models.TimeStampedModel):
+class Product(models.Model):
     clothes = models.ForeignKey("clothes",on_delete=models.DO_NOTHING)
     name = models.CharField(max_length=100, verbose_name="상품명")
     
