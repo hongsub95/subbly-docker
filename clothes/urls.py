@@ -12,6 +12,6 @@ urlpatterns = [
     path("outer/", views.clothes_list_outer, name="clothes_list_outer"),
     path("onepiece/", views.clothes_list_onepiece, name="clothes_list_onepiece"),
     path("<int:clothes_id>/", views.clothes_detail, name="clothes_detail"),
-    path("search/", views.SearchView.as_view(), name="search"),
+    path("search/", views.SearchView, name="search"),
    
 ]

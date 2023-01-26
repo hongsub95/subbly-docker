@@ -66,7 +66,7 @@ class Clothes(core_models.TimeStampedModel):
 
 #내부용
 class Product(core_models.TimeStampedModel):
-    clothes = models.ForeignKey("clothes",on_delete=models.DO_NOTHING)
+    clothes = models.ForeignKey("clothes",on_delete=models.DO_NOTHING,related_name='product')
     name = models.CharField(max_length=100, verbose_name="상품명")
     
     description = models.TextField(verbose_name="설명")

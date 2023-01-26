@@ -43,7 +43,7 @@ services:
     volumes:
       - ./logstash/config/logstash.yml:/usr/share/logstash/config/logstash.yml:ro,z
       - ./logstash/pipeline:/usr/share/logstash/pipeline:ro,z
-      - ./logstash/drivers/:/opt/logstash/vendor/jar/jdbc/
+      - ./logstash/drivers/:/usr/share/logstash/vendor/jar/jdbc/
     environment:
       - TZ=Asia/Seoul
       - "LS_JAVA_OPTS=-Xmx256m -Xms256m"

@@ -22,7 +22,7 @@
                 <nav class="navbar bg-light ">
                     <div class="container-fluid">
                     <form method="GET" action="{% url 'clothes:search' %}" class="d-flex" role="search">
-                        <input class="form-control me-2" type="search" name = "search" placeholder="옷 검색" aria-label="Search">
+                        <input class="form-control me-2" type="search" name = "search_keyword" placeholder="상품명을 입력해주세요." aria-label="Search",value="{{request.GET.search_keyword}}">
                         <button class="btn btn-outline-success" type="submit">Search</button>
                     </form>
                     </div>
