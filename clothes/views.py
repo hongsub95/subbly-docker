@@ -170,7 +170,7 @@ def SearchView(request):
         )
         """
     elastic_sql +=f"""
-    ORDER BY DESC
+    score() ORDER BY DESC
     """
     response = elasticsearch.sql.query(body={"query":elastic_sql})
     product_ids = [row[0] for row in response['rows']]

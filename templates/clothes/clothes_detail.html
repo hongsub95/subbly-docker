@@ -12,7 +12,10 @@
         <select class="form-select form-select-sm" style="width: 8rem" aria-label=".form-select-sm example">
             <option selected>사이즈-색상</option>
             {% for option in product %}
-                <option value="{{option.size}}">{{option.size}}-{{option.colors}}</option>
+                {% if option.is_soldout %}
+                    <option value="{{option.size}}">{{option.size}}-{{option.colors}}는 품절</option>
+                {% endif %}
+                    <option value="{{option.size}}">{{option.size}}-{{option.colors}}</option>
             {% endfor %}
         </select>
     <a href = '{% url 'lists:add_list' clothes.pk %}'>
