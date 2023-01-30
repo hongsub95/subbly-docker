@@ -151,15 +151,17 @@ def clothes_detail(request,clothes_id):
 
 def SearchView(request):
     search_keyword = request.GET.get('search_keyword','')
-    elasticsearch = Elasticsearch("https://localhost:9200",http_auth=('elastic','elasticpassword'),)
+    elasticsearch = Elasticsearch("http://192.168.254.16:9200",http_auth=('elastic','elasticpassword'),)
     elastic_sql = f"""
-    SELECT id FROM subbly__clothes_clothes_type_2
+    SELECT id FROM subbly___clothes_clothes_type_2
     WHERE 1 = 1
     """
 
     if search_keyword:
         elastic_sql +=f"""
-        AND(
+        AND
+        (
+            
             MATCH(name_nori, '{search_keyword}')
             OR
             MATCH(description_nori, '{search_keyword}')
@@ -167,15 +169,34 @@ def SearchView(request):
             MATCH(category_name_nori, '{search_keyword}')
             OR
             MATCH(market_name_nori, '{search_keyword}')
+            OR
+            MATCH(name_chosung, '{search_keyword}')
+            OR
+            MATCH(description_chosung, '{search_keyword}')
+            OR
+            MATCH(category_name_chosung, '{search_keyword}')
+            OR
+            MATCH(market_name_chosung, '{search_keyword}')
+            OR
+            MATCH(name_jamo, '{search_keyword}')
+            OR
+            MATCH(description_jamo, '{search_keyword}')
+            OR
+            MATCH(category_name_jamo, '{search_keyword}')
+            OR
+            MATCH(market_name_jamo, '{search_keyword}')
         )
         """
     elastic_sql +=f"""
-    score() ORDER BY DESC
+    ORDER BY score() DESC
     """
     response = elasticsearch.sql.query(body={"query":elastic_sql})
     product_ids = [row[0] for row in response['rows']]
     order = Case(*[When(id=id,then=pos) for pos,id in enumerate(product_ids)])
     products = Clothes.objects.filter(id__in=product_ids).prefetch_related('category').prefetch_related('product').prefetch_related('market').order_by(order)
+    page = request.GET.get("page","1")
+    paginator = Paginator(products,8)
+    products =paginator.get_page(page)
     return render(request,"clothes/search.html",{"products":products})
     
     

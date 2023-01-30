@@ -5,28 +5,28 @@
     {% if products %}
         <div class = "t-container t-w-full">
             <div class="t-flex ">
-                {% for c in clothes %}
-                    {% include "mixins/clothes_card.html" with clothes=c %}
+                {% for product in products %}
+                    {% include "mixins/clothes_card.html" with clothes=product %}
                 {% endfor %}
             </div>
-            {% if clothes.has_previous %}
-                <a href="?page={{clothes.previous_page_number}}">이전</a>
+            {% if products.has_previous %}
+                <a href="?page={{products.previous_page_number}}">이전</a>
             {% endif %}
 
-            Page {{clothes.number}} of {{clothes.paginator.num_page}}
+            Page {{products.number}} of {{products.paginator.num_page}}
 
-            {% if clothes.has_next %}
-                <a href="?page={{clothes.next_page_number}}">다음</a>
+            {% if products.has_next %}
+                <a href="?page={{products.next_page_number}}">다음</a>
             {% endif %}
             
-            {% for page in clothes.paginator.page_range %}
+            {% for page in products.paginator.page_range %}
                 {{page}}
             {% endfor %}
     
         </div>
-    {% elif query %}
+    {% elif request.GET.search_keyword %}
     <div class = "t-text-center ">
-       <h3>죄송합니다. 현재 찾으시는 {{query}} 상품이 없습니다.</h3>
+       <h3>죄송합니다. 현재 찾으시는 {{request.GET.search_keyword}} 상품이 없습니다.</h3>
     </div>
     {% endif %}
     
