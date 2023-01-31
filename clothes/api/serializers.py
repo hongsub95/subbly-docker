@@ -9,8 +9,6 @@ class CategorySerializer(serializers.ModelSerializer):
         model = clothes_models.Categories
         fields = ("name",)
 
-
-
 class ClothesSerializer(serializers.ModelSerializer):
     category = CategorySerializer()
     market = markets_serializers.MarketSerialzer()
@@ -33,8 +31,6 @@ class ClothesCreateSerializer(serializers.ModelSerializer):
         request = self.context.get("request")
         categories_data = validated_data.pop("category")
         markets_data = validated_data.pop("market")
-        sizes_data = validated_data.pop("size")
-        colors_data = validated_data.pop("colors")
         clothes = clothes_models.Clothes.objects.create(
             **validated_data, host=request.user
         )
@@ -49,5 +45,7 @@ class ClothesPatchSerializer(serializers.ModelSerializer):
     class Meta:
         model = clothes_models.Clothes
         exclude = ()
+
+
         
     

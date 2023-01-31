@@ -25,6 +25,7 @@ class UserRefreshTokenView(GenericAPIView):
     permission_classes = ()
     authentication_classes = ()
     serializer_class = ApiRefreshRefreshTokenSerializer
+
     
     def post(self, request: HttpRequest):
         

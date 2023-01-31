@@ -67,10 +67,11 @@ DATABASES = {
         "NAME":"subbly",
         "USER": "root",
         "PASSWORD":os.environ.get("DB_PWD"),
-        "HOST": "localhost",
+        "HOST": "192.168.254.16",
         "PORT": "3306",
         'OPTIONS':{
-            'init_command' : "SET sql_mode='STRICT_TRANS_TABLES'"
+            'init_command' : "SET sql_mode='STRICT_TRANS_TABLES'",
+            'auth_plugin': 'mysql_native_password'
         },
     }
 }
@@ -135,6 +136,7 @@ STATICFILES_DIRS = [
 REST_FRAMEWORK = {
     "DEFAULT_PAGINATION_CLASS": 
         "rest_framework.pagination.PageNumberPagination",
+        "PAGE_SIZE": 10,
     'DEFAULT_PERMISSION_CLASSES': [
         'rest_framework.permissions.IsAuthenticated',
         'rest_framework.permissions.AllowAny',
@@ -142,11 +144,10 @@ REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES':
         ['rest_framework_simplejwt.authentication.JWTAuthentication',],
         
-    "PAGE_SIZE": 10,
 }
 
 SIMPLE_JWT = {
-    'ACCESS_TOKEN_LIFETIME': datetime.timedelta(minutes=30),
+    'ACCESS_TOKEN_LIFETIME': datetime.timedelta(hours=3),
     'REFRESH_TOKEN_LIFETIME': datetime.timedelta(days=7),
     'ROTATE_REFRESH_TOKENS': False,
     'BLACKLIST_AFTER_ROTATION': False,
