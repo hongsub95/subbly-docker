@@ -31,46 +31,9 @@ class SearchApiView(APIView):
     def get(self,request):
         search_keyword = request.query_params.get('search')
         elasticsearch = Elasticsearch("http://192.168.254.16:9200",http_auth=('elastic','elasticpassword'),)
-        elastic_sql = f"""
-        SELECT id FROM subbly___clothes_clothes_type_2
-        WHERE 1 = 1
-        """
-
-        if search_keyword:
-            elastic_sql +=f"""
-            AND
-            (
-                
-                MATCH(name_nori, '{search_keyword}')
-                OR
-                MATCH(description_nori, '{search_keyword}')
-                OR
-                MATCH(category_name_nori, '{search_keyword}')
-                OR
-                MATCH(market_name_nori, '{search_keyword}')
-                OR
-                MATCH(name_chosung, '{search_keyword}')
-                OR
-                MATCH(description_chosung, '{search_keyword}')
-                OR
-                MATCH(category_name_chosung, '{search_keyword}')
-                OR
-                MATCH(market_name_chosung, '{search_keyword}')
-                OR
-                MATCH(name_jamo, '{search_keyword}')
-                OR
-                MATCH(description_jamo, '{search_keyword}')
-                OR
-                MATCH(category_name_jamo, '{search_keyword}')
-                OR
-                MATCH(market_name_jamo, '{search_keyword}')
-            )
-            """
-        else:
-            return Response(status=status.HTTP_400_BAD_REQUEST,data={"message":"검색 결과 찾지 못했습니다."})
-        elastic_sql +=f"""
-        ORDER BY score() DESC
-        """
-        response = elasticsearch.sql.query(body={"query":elastic_sql})
-        return Response(response)
+        if not search_keyword:
+            return Response(status=status.HTTP_400_BAD_REQUEST,data={"message":"찾으시는 상품이 없습니다."})
+        docs = elasticsearch.search(index='subbly___clothes_clothes_type_2___v2')
+        data_list = docs['hits']['hits']
+        return Response(data_list)
         
