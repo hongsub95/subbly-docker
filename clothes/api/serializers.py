@@ -1,21 +1,34 @@
 from rest_framework import serializers
-from clothes import models as clothes_models
+
+from django.db import transaction
+
+from clothes.models import Clothes,Product,Categories
 from markets import models as markets_models
 from markets import serializers as markets_serializers
 
 
 class CategorySerializer(serializers.ModelSerializer):
     class Meta:
-        model = clothes_models.Categories
-        fields = ("name",)
+        model = Categories
+        exclude = ()
+        
+class ProductSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Product
+        exclude = ()
+
+class ProductCreateSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Product
 
 class ClothesSerializer(serializers.ModelSerializer):
     category = CategorySerializer()
     market = markets_serializers.MarketSerialzer()
+    product = ProductSerializer(many=True)
     
     class Meta:
-        model = clothes_models.Clothes
-        exclude = ()
+        model = Clothes
+        fields = ["name","description","price","category","market","product"]
 
 class ClothesCreateSerializer(serializers.ModelSerializer):
     category = CategorySerializer()
@@ -23,27 +36,21 @@ class ClothesCreateSerializer(serializers.ModelSerializer):
     
 
     class Meta:
-        model = clothes_models.Clothes
+        model = Clothes
         exclude = ()
         read_only_fields = ("host", "pk", "created", "updated", "market")
-
+    
+    @transaction.atomic
     def create(self, validated_data):
         request = self.context.get("request")
-        categories_data = validated_data.pop("category")
-        markets_data = validated_data.pop("market")
-        clothes = clothes_models.Clothes.objects.create(
+        clothes = Clothes.objects.create(
             **validated_data, host=request.user
         )
-        for category_data in categories_data:
-            clothes_models.Categories.objects.create(clothes=clothes, **category_data)
-        for market_data in markets_data:
-            markets_models.Market.objects.create(clothes=clothes, **market_data)
-        
         return clothes
 
 class ClothesPatchSerializer(serializers.ModelSerializer):
     class Meta:
-        model = clothes_models.Clothes
+        model = Clothes
         exclude = ()
 
 

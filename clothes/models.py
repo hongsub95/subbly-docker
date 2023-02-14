@@ -2,10 +2,10 @@ from multiprocessing.sharedctypes import Value
 from tabnanny import verbose
 from django.db import models
 from django.shortcuts import reverse
-from core import models as core_models
+from config.models import SoftDeleteModel
 
 
-class photo(core_models.TimeStampedModel):
+class photo(SoftDeleteModel):
     name = models.CharField(max_length=30)
     file = models.ImageField(upload_to="product")
     product = models.ForeignKey(
@@ -16,7 +16,7 @@ class photo(core_models.TimeStampedModel):
         verbose_name_plural = "상품 사진"
 
 
-class Categories(core_models.TimeStampedModel):
+class Categories(SoftDeleteModel):
     name = models.CharField(max_length=20, verbose_name="이름")
 
     class Meta:
@@ -26,7 +26,7 @@ class Categories(core_models.TimeStampedModel):
         return self.name
 
 #전시용
-class Clothes(core_models.TimeStampedModel):
+class Clothes(SoftDeleteModel):
     name = models.CharField(max_length=100, verbose_name="상품명")
     description = models.TextField(verbose_name="설명")
     price = models.IntegerField(verbose_name="가격")
@@ -65,7 +65,7 @@ class Clothes(core_models.TimeStampedModel):
         return reverse("clothes:clothes_detail", kwargs={"pk": self.pk})
 
 #내부용
-class Product(core_models.TimeStampedModel):
+class Product(SoftDeleteModel):
     clothes = models.ForeignKey("clothes",on_delete=models.DO_NOTHING,related_name='product')
     name = models.CharField(max_length=100, verbose_name="상품명")
     

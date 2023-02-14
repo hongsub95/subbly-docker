@@ -156,12 +156,10 @@ def SearchView(request):
     SELECT id FROM subbly___clothes_clothes_type_2
     WHERE 1 = 1
     """
-
     if search_keyword:
         elastic_sql +=f"""
         AND
         (
-            
             MATCH(name_nori, '{search_keyword}')
             OR
             MATCH(description_nori, '{search_keyword}')

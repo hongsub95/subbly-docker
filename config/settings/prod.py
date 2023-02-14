@@ -23,6 +23,7 @@ PROJECT_APPS = [
     "clothes.apps.ClothesConfig",
     "markets.apps.MarketsConfig",
     "lists.apps.ListsConfig",
+    "coupons.apps.CouponsConfig"
 ]
 
 THIRD_APPS = [
