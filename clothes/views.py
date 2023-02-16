@@ -60,7 +60,6 @@ def clothes_list_onepiece(request):
     page = request.GET.get("page", 1)
     category_id = Categories.objects.filter(name="원피스").first().id
     clothes_list = Clothes.objects.filter(category_id = category_id).all()
-    
     paginator = Paginator(clothes_list, 10)
     
     try:
@@ -78,9 +77,8 @@ def clothes_list_upper(request):
     page = request.GET.get("page", 1)
     category_id = Categories.objects.filter(name="상의").first().id
     clothes_list = Clothes.objects.filter(category_id = category_id).all()
-    
     paginator = Paginator(clothes_list, 10)
-  
+    
     try:
         clothes = paginator.get_page(page)
         return render(
@@ -126,7 +124,7 @@ def clothes_list_shoes(request):
 def clothes_list_outer(request):
     page = request.GET.get("page", 1)
 
-    category_id = Categories.objects.filter(name="신발").first().id
+    category_id = Categories.objects.filter(name="아우터").first().id
     clothes_list = Clothes.objects.filter(category_id = category_id).all()
     paginator = Paginator(clothes_list, 10)
     

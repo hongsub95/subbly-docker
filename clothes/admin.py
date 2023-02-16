@@ -5,12 +5,26 @@ from django.utils.safestring import mark_safe
 
 class clothes_photo(admin.TabularInline):
     model = models.photo
+    
 
 
 @admin.register(models.photo)
 class PhotoAdmin(admin.ModelAdmin):
+    fieldsets = (
+        (
+            "photo Info",
+            {
+                "fields": (
+                    "name",
+                    "file",
+                    "product"
+                ),
+            },
+        ),
+    )
     list_display = (
         "product",
+        "get_thumbnail",
         
     )
 

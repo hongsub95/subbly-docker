@@ -1,9 +1,9 @@
 from django.db import models
-from core import models as core_models
+from config.models import SoftDeleteModel
 from users import models as User_models
 
 
-class Market(core_models.TimeStampedModel):
+class Market(SoftDeleteModel):
     name = models.CharField(max_length=50)
     phone_number = models.CharField(max_length=13)
     market_url = models.URLField(max_length=200, verbose_name="사이트")

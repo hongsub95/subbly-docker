@@ -4,7 +4,16 @@
     <div class = "t-container t-mx-auto t-pb-10">
         <div class="t-flex t-flex-wrap t-justify-around t-mb-10 -t-x-36">
             {% for c in clothes %}
-                {% include "mixins/clothes_card.html" with clothes=c %}
+                <a href ='{% url 'clothes:clothes_detail' c.pk %}'>
+                    <div class="card t-mb-10" style="width: 18rem;">
+                        <div class="embed-responsive embed-responsive-4by3">
+                            <img src="https://bulma.io/images/placeholders/96x96.png" class="card-img-top embed-responsive-item">
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">{{c.name}}</h5>
+                        </div>
+                    </div>
+                </a>
             {% endfor %}
         </div>
             

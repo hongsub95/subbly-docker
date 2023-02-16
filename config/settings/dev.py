@@ -22,7 +22,6 @@ DJANGO_APPS = [
 
 PROJECT_APPS = [
     "users.apps.UsersConfig",
-    "core.apps.CoreConfig",
     "clothes.apps.ClothesConfig",
     "markets.apps.MarketsConfig",
     "lists.apps.ListsConfig",

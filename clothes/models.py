@@ -50,13 +50,14 @@ class Clothes(SoftDeleteModel):
     def thumbnail(self):
         img_name = self.name
         try:
-            photo = self.photo.get(name=f"{img_name}.jpg")
+            photo = self.photo.get(name=f'{img_name}')
             return photo.file.url
         except IndexError:
             return None
         
     class Meta:
         verbose_name_plural = "상품"
+        ordering = ['-id']
 
     def __str__(self):
         return self.name 
@@ -68,7 +69,7 @@ class Clothes(SoftDeleteModel):
 class Product(SoftDeleteModel):
     clothes = models.ForeignKey("clothes",on_delete=models.DO_NOTHING,related_name='product')
     name = models.CharField(max_length=100, verbose_name="상품명")
-    
+    price = models.IntegerField(verbose_name="가격")
     description = models.TextField(verbose_name="설명")
     stock = models.IntegerField(verbose_name="재고")
     colors = models.CharField(
@@ -94,3 +95,7 @@ class Product(SoftDeleteModel):
         blank=True,
     )
     is_sold_out = models.BooleanField(verbose_name="품절여부",default=False)
+    
+    
+    class Meta:
+        ordering = ['-id']

@@ -73,13 +73,13 @@ def gen_clothes(apps, schema_editor):
     gen_product("슬랙스2","연예인들이 많이 입는 슬랙스",200,25000,clothes8_colors,clothes8_sizes,"하의","형아네옷가게",False)
     
     #clothes9
-    clothes9_colors = ("블랙")
+    clothes9_colors = ("블랙",)
     clothes9_sizes = ("26","27","28","29","30","31","32")
     gen_product("블랙진","무슨 옷을 입든 잘 어울리는 블랙진",200,30000,clothes9_colors,clothes9_sizes,"하의","누나네옷가게",False)
 
     
     #clothes10
-    clothes10_colors = ("블루")
+    clothes10_colors = ("블루",)
     clothes10_sizes = ("26","27","28","29","30","31","32")
     gen_product("청바지","여름에 입어도 시원한 청바지",200,23000,clothes10_colors,clothes10_sizes,"하의","이모네옷가게",False)
 
@@ -97,7 +97,7 @@ def gen_clothes(apps, schema_editor):
 
     
     #clothes13
-    clothes13_colors = ("베이직")
+    clothes13_colors = ("베이직",)
     clothes13_sizes = ("Free",)
     gen_product("아우터3","인스타 여신들이 입는 코트",200,90000,clothes13_colors,clothes13_sizes,"아우터","이모네옷가게",False)
     
@@ -115,7 +115,7 @@ def gen_clothes(apps, schema_editor):
     
     
     #clothes16
-    clothes16_colors = ("화이트")
+    clothes16_colors = ("화이트",)
     clothes16_sizes = ("235","240","245","250","255","260","265","270","275")
     gen_product("신발2","봄에 신으면 이쁜 신발",200,53000,clothes16_colors,clothes16_sizes,"신발","이모네옷가게",False)
     
