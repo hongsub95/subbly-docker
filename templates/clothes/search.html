@@ -3,8 +3,8 @@
 {% block content %}
 
     {% if products %}
-        <div class = "t-container t-w-full">
-            <div class="t-flex ">
+        <div class = "t-container t-mx-auto t-justify-around t-pb-10">
+            <div class="t-flex t-flex-wrap t-mb-10">
                 {% for product in products %}
                     {% include "mixins/clothes_card.html" with clothes=product %}
                 {% endfor %}

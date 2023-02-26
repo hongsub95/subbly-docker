@@ -26,6 +26,7 @@ PROJECT_APPS = [
     "markets.apps.MarketsConfig",
     "lists.apps.ListsConfig",
     "seed.apps.SeedConfig",
+    "orders.apps.OrdersConfig",
 ]
 
 THIRD_APPS = [
