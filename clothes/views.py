@@ -144,6 +144,7 @@ def clothes_list_outer(request):
 def clothes_detail(request,clothes_id):
     clothes = Clothes.objects.get(pk=clothes_id)
     product = Product.objects.filter(clothes_id=clothes_id).all()
+    print(request.GET)
     return render(request,"clothes/clothes_detail.html",{"clothes":clothes,"product":product})
     
 

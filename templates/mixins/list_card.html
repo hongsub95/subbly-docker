@@ -1,3 +1,3 @@
 <div class = "t-container">
-    <a href={{"clothes.get_absolute_url"}}>{{clothes.name}}</a>
+    <a href="{% url 'clothes:clothes_detail' clothes.pk %}">{{clothes.name}}</a>
 </div>

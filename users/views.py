@@ -11,7 +11,7 @@ class LoginView(FormView):
 
     template_name = "users/login.html"
     form_class = forms.LoginForm
-    success_url = reverse_lazy("core:home")
+    success_url = reverse_lazy("clothes:all_clothes")
 
     def form_valid(self, form):
         email = form.cleaned_data.get("email")
@@ -24,13 +24,13 @@ class LoginView(FormView):
 
 def log_out(request):
     logout(request)
-    return redirect(reverse("core:home"))
+    return redirect(reverse("clothes:all_clothes"))
 
 
 class SignUpView(FormView):
     template_name = "users/signup.html"
     form_class = forms.SignUpForm
-    success_url = reverse_lazy("core:home")
+    success_url = reverse_lazy("clothes:all_clothes")
 
     def form_valid(self, form):
         form.save()
@@ -89,6 +89,6 @@ def kakao_callback(request):
             user.set_unusable_password()
             user.save()
         login(request, user)
-        return redirect(reverse("core:home"))
+        return redirect(reverse("clothes:all_clothes"))
     except KakaoException:
         return redirect(reverse("users:login"))
