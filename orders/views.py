@@ -2,7 +2,6 @@ from django.shortcuts import render,redirect
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
 from django.views.generic import FormView
-from .forms import OrderForm
 from .models import Order
 from users.models import User
 from clothes.models import Product
@@ -19,8 +18,20 @@ def OrderView(request,pk):
         m=p.search(option)
         n = m.group()  #정규식을 이용하여 Product pk를 구함
         product = Product.objects.get(pk=n)
-        return render(request,'orders/order.html',{'product':product})
+        print(request.POST,request.GET)
+        return render(request,'orders/order.html',{'product':product,"order":Order})
         
-def OrderCompleteView(request):
-    pass
+
+@login_required
+def OrderCompleteView(request,pk):
+    product = Product.objects.get(pk=pk)
+    cate = request.POST.get('paycate')
+    address_kakao = request.POST.get('address')
+    address_detail = request.POST.get('address_detail')
+    Order.objects.create(buyer=request.user,product=product,address=address_kakao + address_detail,paycate=cate)
+    return render(request,'orders/complete.html')
+        
+        
+        
+
     

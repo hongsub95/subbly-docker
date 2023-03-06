@@ -1,7 +1,8 @@
 {% extends 'base.html' %}
 {% block content %}
-<div class = t-text-center>
-    <form action ="{% url 'orders:order-complete' %}" method = "POST">
+<div class = t-flex t-justify-center>
+    <form action ="{% url 'orders:order-complete' product.pk %}" method = "POST">
+        {% csrf_token %}
         <div>
             <div class="card mb-3" style="max-width: 540px;">
                 <div class="row g-0">
@@ -17,7 +18,32 @@
                 </div>
             </div>
         </div>
-        {% include 'orders/address.html' %}
+            <th>주소</th>
+                <td><input type="text" id="address_kakao" name="address" readonly /></td>            
+            <th>상세 주소</th>
+                <td><input type="text" name="address_detail" /></td>
+        <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+        <script>
+        window.onload = function(){
+        document.getElementById("address_kakao").addEventListener("click", function(){ //주소입력칸을 클릭하면
+            //카카오 지도 발생
+            new daum.Postcode({
+                oncomplete: function(data) { //선택시 입력값 세팅
+                    document.getElementById("address_kakao").value = data.address; // 주소 넣기
+                    document.querySelector("input[name=address_detail]").focus(); //상세입력 포커싱
+                }
+            }).open();
+        });
+        }
+        </script>
+        <select name= paycate class="form-select is-invalid" id="validationServer04" aria-describedby="validationServer04Feedback" required>
+            <option value="{{order.paycate.cash}}">계좌이체</option>
+            <option value="{{order.paycate.card}}">카드</option>
+        </select>
+        <div id="validationServer04Feedback" class="invalid-feedback">
+            결제수단을 정해주세요
+        </div>
+
     <button type="submit" class="btn btn-outline-secondary" style="margin-right:5px;">구매하기</button>
     </div>
 {% endblock content %}     

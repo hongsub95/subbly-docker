@@ -5,5 +5,5 @@ app_name = "orders"
 
 urlpatterns = [
     path('<int:pk>/',views.OrderView,name="order"),
-    path('complete/',views.OrderCompleteView,name="order-complete")
+    path('<int:pk>/complete/',views.OrderCompleteView,name="order-complete")
 ]

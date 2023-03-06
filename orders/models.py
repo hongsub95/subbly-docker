@@ -14,7 +14,7 @@ class Order(SoftDeleteModel):
     buyer = models.ForeignKey("users.User",related_name="order",on_delete=models.CASCADE)
     product = models.ForeignKey("clothes.Product",related_name="order",on_delete=models.CASCADE)
     orderstate = models.CharField(max_length=20,choices=OrderState.choices,default=OrderState.purchase)
-    address = models.CharField(max_length = 20, null=True,verbose_name="주소")
+    address = models.CharField(max_length = 100, null=True,verbose_name="주소")
     paycate = models.CharField(max_length=10,choices=PayChoice.choices,default=PayChoice.cash)
     coupon = models.ForeignKey("coupons.Coupon",blank=True,null=True,related_name="order",on_delete=models.CASCADE)
     
