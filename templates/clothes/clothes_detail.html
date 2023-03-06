@@ -1,29 +1,38 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<div class="t-container t-mx-auto t-flex t-justify-around">
-    <form action='{% url 'orders:order' %}' method="POST">
-        {% csrf_token %}
-        <img class="t-mr-10" src="{{clothes.thumbnail}}" style="width: 30rem">
-        <div class ="t-flex-col t-justify-between">
-            <h3>{{clothes.name}}</h3>
-            <h5>{{clothes.description}}</h5>
-            <h7>가격 : {{clothes.price}} </h7>
-            <select name='option' class="form-select form-select-sm" style="width: 8rem" aria-label=".form-select-sm example">
-                <option selected>사이즈-색상</option>
-                {% for option in product %}
-                    {% if option.is_soldout %}
-                        <option value="{{option}}">{{option.size}} - {{option.colors}}</option>
-                    {% endif %}
-                        <option value="{{option}}">{{option.size}} - {{option.colors}}</option>
-                {% endfor %}
-            </select>
-            <button type="submit" class="btn btn-outline-secondary" style="margin-right:5px;">구매하기</button>
-        </form>
-    <a href = '{% url 'lists:add_list' clothes.pk %}'>
-        장바구니에 담기
-    </a>
+    <div class="t-container t-mx-auto t-flex t-justify-around">
+        <form action='{% url 'orders:order' clothes.pk %}' method="POST">
+            {% csrf_token %}
+            <img class="t-mr-10" src="{{clothes.thumbnail}}" style="width: 30rem">
+            <div class ="t-flex-col t-justify-between">
+                <h3>{{clothes.name}}</h3>
+                <h5>{{clothes.description}}</h5>
+                <h7>가격 : {{clothes.price}}원 </h7>
+
+                <select name= option class="form-select is-invalid" id="validationServer04" aria-describedby="validationServer04Feedback" required>
+                    <option selected disabled>사이즈-색상</option>
+                    {% for option in product %}
+                        {% if option.is_soldout %}
+                            <option value="{{option}}">{{option.size}} - {{option.colors}}</option>
+                        {% endif %}
+                            <option value="{{option}}">{{option.size}} - {{option.colors}}</option>
+                    {% endfor %}
+                </select>
+                <div id="validationServer04Feedback" class="invalid-feedback">
+                    사이즈, 색상을 골라주세요
+                </div>
+                <button type="submit" class="btn btn-outline-secondary" style="margin-right:5px;">구매하기</button>
+            </form>
+        <button type="submit" class="btn btn-outline-secondary" style="margin-right:5px;">
+            <a href = '{% url 'lists:add_list' clothes.pk %}'>
+                장바구니에 담기
+            </a>
+        </button>
+        </div>
+        {% if messages %}
+            {% include 'mixins/messages.html' %}
+        {% endif %}
     </div>
-</div>
 {% endblock content %}
 

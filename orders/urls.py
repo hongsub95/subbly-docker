@@ -4,5 +4,6 @@ from . import views
 app_name = "orders"
 
 urlpatterns = [
-    path('',views.OrderView,name="order")
+    path('<int:pk>/',views.OrderView,name="order"),
+    path('complete/',views.OrderCompleteView,name="order-complete")
 ]
