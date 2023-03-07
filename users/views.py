@@ -19,6 +19,9 @@ class LoginView(FormView):
         user = authenticate(self.request, username=email, password=password)
         if user is not None:
             login(self.request, user)
+        next_val = self.request.POST.get('next')
+        if next_val:
+            return redirect(next_val)
         return super().form_valid(form)
 
 

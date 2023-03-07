@@ -1,7 +1,7 @@
 from rest_framework import serializers
 from django.db import transaction
 from coupons.models import Coupon
-from coupons.services import MakeCouponNum
+from coupons.api.services import MakeCouponNum
 
 class CouponSerializer(serializers.ModelSerializer):
     class Meta:

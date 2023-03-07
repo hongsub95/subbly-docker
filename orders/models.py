@@ -10,7 +10,7 @@ class Order(SoftDeleteModel):
     class PayChoice(models.TextChoices):
         card = "card","카드"
         cash = "cash","계좌이체"
-    order_id = models.CharField(max_length=20,primary_key=True,unique=True)
+    order_id = models.CharField(max_length=15,primary_key=True,unique=True)
     buyer = models.ForeignKey("users.User",related_name="order",on_delete=models.CASCADE)
     product = models.ForeignKey("clothes.Product",related_name="order",on_delete=models.CASCADE)
     orderstate = models.CharField(max_length=20,choices=OrderState.choices,default=OrderState.purchase)

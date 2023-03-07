@@ -16,7 +16,8 @@
             <span class="t-text-gray-600 t-font-medium t-mx-4 t-text-sm">or</span>
             <div class="t-h-px t-w-full t-bg-gray-500"></div>
         </div>
-        <form method="POST" action = "{% url 'users:login' %}">
+        <form method="POST" action = "{% url 'users:login' %}" >
+            <input type="hidden" name="next" value="{{ request.GET.next }}" />
             {% csrf_token %}
             {{form.as_p}}
             <button>로그인</button>
