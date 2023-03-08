@@ -9,9 +9,10 @@ urlpatterns = [
     path("users/", include("users.urls", namespace="users")),
     path("lists/", include("lists.urls", namespace="lists")),
     path("admin", admin.site.urls),
+    path("orders/",include("orders.urls",namespace="orders")),
     path("api/v1/clothes/", include("clothes.api.urls", namespace="clothes_api")),
     path("api/v1/users/", include("users.api.urls", namespace="users_api")),
-    path("orders/",include("orders.urls",namespace="orders"))
+    path('api/v1/orders/',include('orders.api.urls',namespace='orders_api')),
 ]
 
 
