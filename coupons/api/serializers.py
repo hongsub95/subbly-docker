@@ -6,12 +6,12 @@ from coupons.api.services import MakeCouponNum
 class CouponSerializer(serializers.ModelSerializer):
     class Meta:
         model = Coupon
-        fields = ["pk","coupon_id","name","description","min_price","discount","is_issued","is_used","coupon_cate","owner","created_at","deleted_at"]
+        fields = ["pk","coupon_id","name","description","min_price","discount","is_issued","is_used","coupon_cate","owner","created","deleted_at"]
 
 class CouponCreateSerializer(serializers.ModelSerializer):
     class Meta:
         model = Coupon
-        fields = ["pk","coupon_id","name","description","min_price","discount","is_issued","is_used","coupon_cate","owner","created_at","deleted_at"]
+        fields = ["pk","coupon_id","name","description","min_price","discount","is_issued","is_used","coupon_cate","owner","created","deleted_at"]
     @transaction.atomic
     def create(self, validated_data):
         coupon_id = validated_data.pop('coupon_id')
@@ -32,7 +32,7 @@ class CouponCreateSerializer(serializers.ModelSerializer):
 class CouponPatchSerializer(serializers.ModelSerializer):
     class Meta:
         model = Coupon
-        fields = ["pk","coupon_id","name","description","min_price","discount","is_issued","is_used","coupon_cate","owner","created_at","delete_date","deleted_at"] 
+        fields = ["pk","coupon_id","name","description","min_price","discount","is_issued","is_used","coupon_cate","owner","created","delete_date","deleted_at"] 
 
 class CouponDeleteSerializer(serializers.ModelSerializer):
     pass

@@ -2,6 +2,7 @@ from rest_framework.generics import ListCreateAPIView,RetrieveUpdateDestroyAPIVi
 from rest_framework.permissions import IsAdminUser
 
 from orders.models import Order
+from clothes.models import Product
 from .permissions import MarketMasterOrAdminUser
 from .serializers import OrderSerializer,OrderCreateSerailizer
 
@@ -9,8 +10,7 @@ from .serializers import OrderSerializer,OrderCreateSerailizer
 class AdminOrderListCreateAPIView(ListCreateAPIView):
     queryset = Order.objects.all()
     permission_classes = [IsAdminUser,]
-        
-    
+
     def get_serializer_class(self):
         if self.request.method == 'GET':
             return OrderSerializer
@@ -23,11 +23,18 @@ class AdminOrderRetrieveUpdateDestroyAPIView(RetrieveUpdateDestroyAPIView):
     
     allowed_methods = ('GET', 'PATCH','DELETE','OPTION')
     
-    def patch(self, request, *args, **kwargs):
-        pass
-
 class MarketOrderListCreateAPIView(ListCreateAPIView):
-    pass
+    permission_classes = [MarketMasterOrAdminUser]
+    
+    def get_queryset(self):
+        market_id = self.kwargs["market_id"]
+        return Product.objects.filter(market_id=market_id).prefetch_related('buyer').prefetch_related('coupon').all()
+    
+    def get_serializer(self, *args, **kwargs):
+        if self.request.method == "GET":
+            return OrderSerializer
+        else:
+            return OrderCreateSerailizer
 
 class MarketOrderRetrieveUpdateDestroyAPIView(RetrieveUpdateDestroyAPIView):
     pass

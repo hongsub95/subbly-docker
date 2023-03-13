@@ -15,6 +15,12 @@ class OrderSerializer(serializers.ModelSerializer):
         fields = ["order_id","buyer","product","orderstate","address","paycate","coupon","deleted_at","created","updated"]
 
 class OrderCreateSerailizer(serializers.ModelSerializer):
-    pass
+    buyer = UserSerializer()
+    coupon = CouponSerializer()
+    product = ProductSerializer()
+    class Meta:
+        model = Order
+        fields = ["order_id","buyer","product","orderstate","address","paycate","coupon","deleted_at","created","updated"]
+        
         
     

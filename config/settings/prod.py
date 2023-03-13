@@ -32,6 +32,7 @@ THIRD_APPS = [
     "storages",
     "rest_framework_swagger",
     'rest_framework_simplejwt',
+    'drf_yasg',
 ]
 
 INSTALLED_APPS = DJANGO_APPS + PROJECT_APPS + THIRD_APPS
