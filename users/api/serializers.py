@@ -7,7 +7,7 @@ from rest_framework import serializers
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = users_models.User
-        exclude = ()
+        fields = ("id","is_superuser","username","is_staff","name","login_method","superhost",)
         read_only_fields = ["pk","created"]
 
 class UserTokenObtainSerializer(TokenObtainPairSerializer): #token 페어로드

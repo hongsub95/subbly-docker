@@ -1,11 +1,11 @@
 import random
 import string
-from coupons.models import Coupon
+from orders.models import Order
 
-def MakeOrderIdNum():
-    coupon_num = ''.join(random.choice(string.ascii_uppercase + string.ascii_lowercase + string.digits) for _ in range(15))
+def MakeOrderId():
+    order_id = ''.join(random.choice(string.ascii_uppercase + string.ascii_lowercase + string.digits) for _ in range(15))
     try:
-        Coupon.objects.get(coupon_id=coupon_num)
+        Order.objects.get(order_id=order_id)
     except:
-        return coupon_num
-    MakeOrderIdNum()
+        return order_id
+    MakeOrderId()

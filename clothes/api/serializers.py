@@ -54,5 +54,6 @@ class ClothesPatchSerializer(serializers.ModelSerializer):
         exclude = ()
 
 
+
         
     

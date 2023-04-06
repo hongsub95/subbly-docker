@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 {% block content %}
-
-<h1>결제완료!</h1>
-
+<script type="text/javascript">
+    alert("결제완료!");
+    location.href = "{% url "clothes:all_clothes" %}"
+</script>
 {% endblock content %}
