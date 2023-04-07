@@ -27,10 +27,11 @@ def OrderView(request,pk):
 def OrderCompleteView(request,pk):
     product = Product.objects.get(pk=pk)
     cate = request.POST.get('paycate')
+    zip_code = request.POST.get("zip_code")
     address_kakao = request.POST.get('address')
     address_detail = request.POST.get('address_detail')
     order_id = MakeOrderId()
-    Order.objects.create(order_id=order_id,buyer=request.user,product=product,address=f"{address_kakao +' '+ address_detail}",paycate=cate)
+    Order.objects.create(order_id=order_id,buyer=request.user,product=product,address=f"{(zip_code) + ' ' +address_kakao +' '+ address_detail}",paycate=cate)
     return render(request,'orders/complete.html')
         
         

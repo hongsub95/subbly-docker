@@ -1,10 +1,13 @@
 import os
 import requests
-from django.shortcuts import redirect, reverse
+from django.shortcuts import redirect, reverse,render
 from django.urls import reverse_lazy
 from django.views.generic import FormView
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
 from . import forms, models
+from orders.models import Order
+
 
 
 class LoginView(FormView):
@@ -95,3 +98,13 @@ def kakao_callback(request):
         return redirect(reverse("clothes:all_clothes"))
     except KakaoException:
         return redirect(reverse("users:login"))
+
+@login_required
+def PurchaseList(request,user_pk):
+    try:
+        orders = Order.objects.filter(buyer=user_pk).all()
+        return render(request,'users/mypage.html',{'orders':orders})
+    except Order.DoesNotExist:
+        return render(request,'users/mypage.html')
+    
+    
